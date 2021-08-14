@@ -12,14 +12,20 @@ const Cart = (props) => {
     const [didSubmit, setDidSubmit] = useState(false);
     const cartCtx = useContext(CartContext);
 
-    const totalAmount = `$${cartCtx.totalAmount.toFixed(2)}`;
+    const totalAmount = `₹${cartCtx.totalAmount.toFixed(2)}`;
     const hasItems = cartCtx.items.length > 0;
 
     const cartItemRemoveHandler = (id) => {
         cartCtx.removeItem(id);
     };
 
-    const cartItemAddHandler = (item) => {
+    const cartItemAddHandler = (props) => {
+        const item={
+            id: props.id,
+            name: props.name,
+            amount: 1,
+            price: props.price,
+        };
         cartCtx.addItem(item);
     };
 
@@ -57,7 +63,7 @@ const Cart = (props) => {
     );
 
     const modalActions = (
-        <div className={classes.actions}>
+        <div className={classes.actions } >
             <button className={classes['button--alt']} onClick={props.onClose}>
                 Close
             </button>
